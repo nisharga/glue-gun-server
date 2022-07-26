@@ -38,7 +38,7 @@ const client = new MongoClient(uri, {
 // }
 
 app.get("/", (req, res) => {
-  res.send("I love u and not love u xcss");
+  res.send("I love u and not love u form BANGLADESH");
 });
 
 app.get("/maa", (req, res) => {
