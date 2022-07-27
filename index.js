@@ -20,7 +20,7 @@ const client = new MongoClient(uri, {
 });
 
 app.get("/", (req, res) => {
-  res.send("I love u and not love u form BANGLADESH");
+  res.send("mI love u PUT");
 });
 
 app.get("/maa", (req, res) => {
@@ -46,40 +46,12 @@ async function run() {
     // insertOne signup-user to database end
 
     // insertOne product to database
-    app.put("/product", async (req, res) => {
+    app.post("/addproduct", async (req, res) => {
       const data = req.body;
       const result = await productCollection.insertOne(data);
       console.log(result, "product create on db");
     });
     // insertOne signup-user to database end
-
-    // insertOne review to database
-    app.put("/dashboard/addareview/:email", async (req, res) => {
-      const data = req.body;
-
-      console.log(data, "review update on db");
-    });
-    // insertOne review to database endconst result = await reviewCollection.insertOne(data);
-
-    // update a field by id
-    app.post("user/:email", (req, res) => {
-      const body = req.body;
-      res.send(body, req.body.email);
-      console.log(
-        "🚀 ~ file: index.js ~ line 68 ~ app.put ~ quantity",
-        quantity
-      );
-
-      //   const filter = { _id: ObjectId(id) };
-      //   const options = { upsert: true };
-      //   const result = await dbCollection.updateOne(
-      //     filter,
-      //     { $set: { quantity: quantity } },
-      //     options
-      //   );
-      //   res.send(result);
-    });
-    // update a field by id
   } finally {
     //        await client.close()
   }
