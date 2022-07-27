@@ -3,7 +3,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const app = express();
 const port = process.env.PORT || 5000;
-const { MongoClient, ServerApiVersion } = require("mongodb");
+const { MongoClient, ServerApiVersion, ObjectId } = require("mongodb");
 require("dotenv").config();
 
 //middleware
@@ -61,6 +61,16 @@ async function run() {
       res.send(data);
     });
     //  show all product to ui inventory page end
+
+    // show product to single product
+    app.get("/product/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const cursor = productCollection.find(query);
+      const data = await cursor.toArray();
+      res.send(data);
+    });
+    //  show product to single product
 
     // insertOne review to database
     app.post("/dashboard/addareview", async (req, res) => {
