@@ -52,6 +52,23 @@ async function run() {
       console.log(result, "product create on db");
     });
     // insertOne product to database end.
+
+    // show all product to ui(inventory page)
+    app.get("/allproduct", async (req, res) => {
+      const query = {};
+      const cursor = productCollection.find(query);
+      const data = await cursor.toArray();
+      res.send(data);
+    });
+    //  show all product to ui inventory page end
+
+    // insertOne review to database
+    app.post("/dashboard/addareview", async (req, res) => {
+      const data = req.body;
+      const result = await reviewCollection.insertOne(data);
+      console.log(result, "review createon db");
+    });
+    // insertOne review to database end.
   } finally {
     //        await client.close()
   }
