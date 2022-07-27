@@ -51,7 +51,7 @@ async function run() {
       const result = await productCollection.insertOne(data);
       console.log(result, "product create on db");
     });
-    // insertOne signup-user to database end
+    // insertOne product to database end
   } finally {
     //        await client.close()
   }
