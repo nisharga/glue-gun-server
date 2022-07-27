@@ -18,24 +18,6 @@ const client = new MongoClient(uri, {
   useUnifiedTopology: true,
   serverApi: ServerApiVersion.v1,
 });
-// DB_USER=Nisharga
-// DB_PASSWORD=aDj8QSwONIMYsWtK
-// async function run() {
-//   try {
-//     await client.connect();
-//     const dbCollectionProfile = client.db("Glue-gun").collection("profile");
-//     console.log("database connect");
-//     app.post("/user", async (req, res) => {
-//       const data = req.body;
-//       console.log(data);
-//   const result = await dbCollectionProfile.insertOne(data);
-//   res.send("data paisi res e");
-//   console.log(result, "gese data all");
-//     });
-//   } finally {
-//   }
-//   run().catch(console.dir);
-// }
 
 app.get("/", (req, res) => {
   res.send("I love u and not love u form BANGLADESH");
@@ -54,11 +36,20 @@ async function run() {
     await client.connect();
     const dbCollection = client.db("glueganserver").collection("user");
     const reviewCollection = client.db("glueganserver").collection("review");
+    const productCollection = client.db("glueganserver").collection("product");
     // insertOne signup-user to database
     app.put("/user", async (req, res) => {
       const data = req.body;
       const result = await dbCollection.insertOne(data);
       console.log(result, "user create on db");
+    });
+    // insertOne signup-user to database end
+
+    // insertOne product to database
+    app.put("/product", async (req, res) => {
+      const data = req.body;
+      const result = await productCollection.insertOne(data);
+      console.log(result, "product create on db");
     });
     // insertOne signup-user to database end
 
