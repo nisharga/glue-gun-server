@@ -37,6 +37,7 @@ async function run() {
     const dbCollection = client.db("glueganserver").collection("user");
     const reviewCollection = client.db("glueganserver").collection("review");
     const productCollection = client.db("glueganserver").collection("product");
+    const orderCollection = client.db("glueganserver").collection("order");
     // insertOne signup-user to database
     app.put("/user", async (req, res) => {
       const data = req.body;
@@ -52,6 +53,14 @@ async function run() {
       console.log(result, "product create on db");
     });
     // insertOne product to database end.
+
+    // insertOne order to database
+    app.post("/purchase/order", async (req, res) => {
+      const data = req.body;
+      const result = await orderCollection.insertOne(data);
+      console.log(result, "product order on db");
+    });
+    // insertOne order to database end.
 
     // show all product to ui(inventory page)
     app.get("/allproduct", async (req, res) => {
