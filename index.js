@@ -62,6 +62,16 @@ async function run() {
     });
     // insertOne order to database end.
 
+    // find user order by email-address
+    app.get("/myitems/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { email: id };
+      const cursor = orderCollection.find(query);
+      const data = await cursor.toArray();
+      res.send(data);
+    });
+    // find user order by email-address end
+
     // show all product to ui(inventory page)
     app.get("/allproduct", async (req, res) => {
       const query = {};
