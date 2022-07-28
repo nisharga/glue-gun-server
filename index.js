@@ -72,6 +72,18 @@ async function run() {
     });
     // find user order by email-address end
 
+    // delet a product from orderCollection by _id
+    app.delete("/myitems/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const result = await orderCollection.deleteOne(query);
+      if (result.deletedCount === 1) {
+        console.log("Sucessfully deleted ");
+      }
+      res.send(result);
+    });
+    // delet a product from orderCollection by _id
+
     // show all product to ui(inventory page)
     app.get("/allproduct", async (req, res) => {
       const query = {};
@@ -98,6 +110,15 @@ async function run() {
       console.log(result, "review createon db");
     });
     // insertOne review to database end.
+
+    // show all review to ui
+    app.get("/review", async (req, res) => {
+      const query = {};
+      const cursor = reviewCollection.find(query);
+      const data = await cursor.toArray();
+      res.send(data);
+    });
+    //  show all review to ui
   } finally {
     //        await client.close()
   }
