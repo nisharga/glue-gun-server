@@ -119,6 +119,28 @@ async function run() {
       res.send(data);
     });
     //  show all review to ui
+
+    // profile details on to ui
+    app.put("/user/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { email: id };
+      const data = req.body;
+      const update = { $set: data };
+      const options = { upsert: true };
+      const result = await dbCollection.updateMany(query, update, options);
+      console.log(data, "profile details updated");
+    });
+    //  profile details end
+
+    // find user details by email-address
+    app.get("/user/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { email: id };
+      const cursor = dbCollection.find(query);
+      const data = await cursor.toArray();
+      res.send(data);
+    });
+    // find user details by email-address end
   } finally {
     //        await client.close()
   }
