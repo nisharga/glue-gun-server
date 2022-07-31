@@ -142,6 +142,41 @@ async function run() {
     });
     // find user details by email-address end
 
+    // payment status add on to ui
+
+    // app.post("/paymentstatus/:id", async (req, res) => {
+    //   const id = req.params.pid.pid;
+    // const query = { _id: ObjectId(id) };
+    // const data = req.body;
+    // const update = { $set: data };
+    // const options = { upsert: true };
+    // const result = await orderCollection.updateOne(query, update, options);
+    // console.log(id, "payment status updated");
+
+    app.put("/paymentstatus/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const data = req.body;
+      const update = { $set: data };
+      const options = { upsert: true };
+      const result = await orderCollection.updateOne(query, update, options);
+      console.log(data, "payment status updated");
+    });
+
+    //  payment status end
+
+    app.put("/deliverystatus/:id", async (req, res) => {
+      const id = req.params.id;
+      const query = { _id: ObjectId(id) };
+      const data = req.body;
+      const update = { $set: data };
+      const options = { upsert: true };
+      const result = await orderCollection.updateOne(query, update, options);
+      console.log(data, "deliverystatus updated");
+    });
+
+    //  payment status end
+
     // ============================================================
     // =============================================================
     // ====================  ADMIN ZONE     ========================
