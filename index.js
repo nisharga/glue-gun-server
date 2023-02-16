@@ -20,7 +20,7 @@ const client = new MongoClient(uri, {
 });
 
 app.get("/", (req, res) => {
-  res.send("NewServer is Running Cool, But MONGO not work");
+  res.send("Server is Running Cool...");
 });
 
 app.get("/maa", (req, res) => {
